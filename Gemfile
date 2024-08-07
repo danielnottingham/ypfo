@@ -4,7 +4,8 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
-gem "bootsnap", require: false
+gem "bootsnap", "1.18.4", require: false
+gem "devise", "4.9.4"
 gem "dotenv-rails", "2.8.1"
 gem "pg", "1.5.6"
 gem "puma", "6.4.2"

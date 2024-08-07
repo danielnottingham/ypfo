@@ -4,6 +4,7 @@ require:
 
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
