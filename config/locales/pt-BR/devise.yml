@@ -1,0 +1,73 @@
+---
+pt-BR:
+  devise:
+    failure:
+      already_authenticated: Você já está autenticado.
+      invalid: "%{authentication_keys} ou senha inválidos."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      unauthenticated: Para continuar, faça login ou registre-se.
+      user:
+        unconfirmed: Antes de continuar, confirme a sua conta.
+    registrations:
+      signed_up: Bem vindo! Você realizou seu registro com sucesso.
+      user:
+        signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu e-mail. Por favor, acesse o link para ativar sua conta.
+    sessions:
+      user:
+        signed_in: Login efetuado com sucesso.
+        signed_out: Logout efetuado com sucesso.
+        already_signed_out: Logout efetuado com sucesso.
+    passwords:
+      user:
+        send_instructions: Dentro de minutos, você receberá um e-mail com as instruções de redefinição da sua senha.
+        updated: A sua senha foi alterada com sucesso. Você está autenticado.
+        send_paranoid_instructions: Caso seu e-mail exista na nossa base de dados, você receberá um e-mail em alguns instantes com as instruções para a redefinição de senha.
+    omniauth_callbacks:
+      user:
+        failure: Não foi possível autorizar de uma conta de %{kind} porque "%{reason}".
+        success: Login efetuado com sucesso.
+    confirmations:
+      user:
+        confirmed: A sua conta foi confirmada com sucesso.
+  users:
+    sessions:
+      new:
+        email: E-mail
+        password: Senha
+        sign_in_with: Entrar com %{provider}
+        or: ou
+        forgot_your_password: Esqueceu a senha?
+        submit: Fazer login
+        already_have_an_account_html: Não tem conta? %{sign_up}
+        sign_up: Crie uma agora
+    registrations:
+      new:
+        sign_up: Criar Conta
+        sign_in: Faça login.
+        or: ou
+        email: E-mail
+        email_confirmation: Confirmação do E-mail
+        password: Senha
+        password_confirmation: Confirmação da senha
+    passwords:
+      new:
+        page_title: Esqueceu sua senha?
+        sign_in: Fazer login
+        sign_up: Criar conta
+        submit: Enviar link de redefinição de senha
+        or: ou
+        email: E-mail
+        other_options: Outras opções
+      edit:
+        page_title: Altere sua senha
+        password: Nova senha
+        password_confirmation: Confirmar nova senha
+        submit: Confirmar
+    shared:
+      links:
+        sign_in: Entrar
+        sign_in_with: Entrar com
+        sign_up: Criar Conta
+        forgot_your_password: Esqueceu sua senha?
+        did_not_receive_confirmation_instructions: Você não recebeu instruções de confirmação?
+        did_not_receive_unlock_instructions: Não recebeu instruções de desbloqueio?
