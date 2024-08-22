@@ -1,0 +1,10 @@
+Description:
+    Generates a new operation
+    Pass the resources name (eg. catalog/products, users, billing/payments) and operation name (eg. create, process, list, settle)
+
+Example:
+    bin/rails generate operation billing/payments/refuse
+
+    This will create:
+        app/operations/billing/payments/refuse.rb
+        spec/operations/billing/payments/refuse_spec.rb

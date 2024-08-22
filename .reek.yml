@@ -91,3 +91,4 @@ exclude_paths:
   - vendor/
   - db/migrate
   - db/seeds
+  - spec/support/auth_helpers.rb

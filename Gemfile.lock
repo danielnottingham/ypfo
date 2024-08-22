@@ -303,6 +303,8 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    service_actor (3.9.2)
+      zeitwerk (>= 1.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
     simplecov (0.22.0)
@@ -351,6 +353,7 @@ DEPENDENCIES
   rspec-rails (= 6.1.0)
   rubocop-performance (= 1.21.0)
   rubocop-rails (= 2.25.1)
+  service_actor (= 3.9.2)
   shoulda-matchers (= 5.3.0)
   simplecov (= 0.22.0)
   tzinfo-data
