@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
+gem "active_model_serializers", "0.10.14"
 gem "bootsnap", "1.18.4", require: false
 gem "devise", "4.9.4"
 gem "devise-api", "0.1.3"
