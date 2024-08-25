@@ -33,7 +33,7 @@ RSpec.describe "Accounts" do
 
           get api_v1_accounts_path, headers: token
 
-          expect(response.parsed_body).to eq([])
+          expect(response.parsed_body).to include({ "accounts" => [] })
         end
       end
 
@@ -56,23 +56,26 @@ RSpec.describe "Accounts" do
           get api_v1_accounts_path, headers: token
 
           expect(response.parsed_body.count).to eq(2)
-          expect(response.parsed_body).to include(
-            {
-              "id" => account_one.id,
-              "title" => account_one.title,
-              "balance_cents" => account_one.balance_cents,
-              "balance_currency" => account_one.balance_currency,
-              "color" => account_one.color,
-              "user_id" => account_one.user_id
-            },
-            {
-              "id" => account_two.id,
-              "title" => account_two.title,
-              "balance_cents" => account_two.balance_cents,
-              "balance_currency" => account_two.balance_currency,
-              "color" => account_two.color,
-              "user_id" => account_two.user_id
-            }
+          expect(response.parsed_body["pagination"]).to be_present
+          expect(response.parsed_body["accounts"]).to match_array(
+            [
+              {
+                "id" => account_one.id,
+                "title" => account_one.title,
+                "balance_cents" => account_one.balance_cents,
+                "balance_currency" => account_one.balance_currency,
+                "color" => account_one.color,
+                "user_id" => account_one.user_id
+              },
+              {
+                "id" => account_two.id,
+                "title" => account_two.title,
+                "balance_cents" => account_two.balance_cents,
+                "balance_currency" => account_two.balance_currency,
+                "color" => account_two.color,
+                "user_id" => account_two.user_id
+              }
+            ]
           )
         end
       end
