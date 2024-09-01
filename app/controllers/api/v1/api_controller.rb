@@ -5,6 +5,7 @@ module Api
     class ApiController < ApplicationController
       include Pundit::Authorization
       include Pagy::Backend
+      include Respondable
 
       before_action :authenticate_devise_api_token!
 
