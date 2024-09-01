@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      account:
+        one: Conta
+        other: Contas
+
+    attributes:
+      account:
+        title: Título
+        color: Cor
+        balance_cents: Saldo
+        balance_currency: BRL
+        user: Usuário
