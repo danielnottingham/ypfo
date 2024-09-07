@@ -44,4 +44,19 @@ RSpec.describe AccountPolicy do
       expect(described_class.new(nil, Account).create?).to be false
     end
   end
+
+  describe "#update?" do
+    it "returns true for user" do
+      user = create(:user)
+      account = create(:account, user: user)
+
+      expect(described_class.new(user, account).update?).to be true
+    end
+
+    it "returns false for non-owner" do
+      account = create(:account)
+
+      expect(described_class.new(nil, account).update?).to be false
+    end
+  end
 end

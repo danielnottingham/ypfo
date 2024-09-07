@@ -36,7 +36,31 @@ module Api
         end
       end
 
+      def update
+        authorize(account)
+        result = Accounts::Update.result(id: account.id.to_s, params: account_params)
+
+        if result.success?
+          success_response(
+            data: result.account,
+            serializer: Api::V1::AccountSerializer,
+            status: :ok,
+            message: I18n.t("api.v1.accounts.update.success")
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message: I18n.t("api.v1.accounts.update.failure")
+          )
+        end
+      end
+
       private
+
+      def account
+        @account ||= Accounts::Find.result(id: params[:id]).account
+      end
 
       def account_params
         params.require(:account).permit(:title, :color).to_h.merge(user: current_user)
