@@ -11,4 +11,8 @@ class AccountPolicy < ApplicationPolicy
   def create?
     user.present?
   end
+
+  def update?
+    user.present? && owner?
+  end
 end

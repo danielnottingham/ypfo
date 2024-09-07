@@ -135,4 +135,70 @@ RSpec.describe "Accounts" do
       end
     end
   end
+
+  describe "PATCH /api/v1/accounts/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized" do
+        account = create(:account)
+
+        patch api_v1_account_path(account.id)
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns error message" do
+        account = create(:account)
+
+        patch api_v1_account_path(account.id)
+
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "with valid params" do
+        it "returns status :ok with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = { id: account.id, title: "Updated Account Title", color: "#ffffff" }
+
+          patch api_v1_account_path(account.id), headers: token, params: { account: params }
+
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.accounts.update.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+
+        it "returns parsed_body data" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = { id: account.id, title: "Updated Account Title", color: "#ffffff" }
+
+          patch api_v1_account_path(account.id), headers: token, params: { account: params }
+
+          expect(response.parsed_body["data"]["account"]["id"]).to eq(account.id)
+          expect(response.parsed_body["data"]["account"]["title"]).to eq(params[:title])
+          expect(response.parsed_body["data"]["account"]["color"]).to eq(params[:color])
+          expect(response.parsed_body["data"]["account"]["user_id"]).to eq(user.id)
+        end
+      end
+
+      context "with invalid params" do
+        it "returns status :unprocessable_content with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = { id: account.id, title: nil, color: "#ffffff" }
+
+          patch api_v1_account_path(account.id), headers: token, params: { account: params }
+
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.accounts.update.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end
