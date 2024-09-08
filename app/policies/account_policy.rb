@@ -15,4 +15,8 @@ class AccountPolicy < ApplicationPolicy
   def update?
     user.present? && owner?
   end
+
+  def destroy?
+    update?
+  end
 end
