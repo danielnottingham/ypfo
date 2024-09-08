@@ -201,4 +201,88 @@ RSpec.describe "Accounts" do
       end
     end
   end
+
+  describe "DELETE /api/v1/accounts/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized" do
+        account = create(:account)
+
+        delete api_v1_account_path(account.id)
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns error message" do
+        account = create(:account)
+
+        delete api_v1_account_path(account.id)
+
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      it "returns status :ok with parsed_body message and status" do
+        user = create(:user)
+        account = create(:account, user: user)
+        token = access_token_for(user)
+
+        delete api_v1_account_path(account.id), headers: token
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.accounts.destroy.success"))
+        expect(response.parsed_body["status"]).to eq("success")
+      end
+
+      it "returns parsed_body data" do
+        user = create(:user)
+        account = create(:account, user: user)
+        token = access_token_for(user)
+
+        delete api_v1_account_path(account.id), headers: token
+
+        expect(response.parsed_body["data"]["account"]["id"]).to eq(account.id)
+      end
+
+      context "when account cannot be destroyed" do
+        it "returns status :unprocessable_content with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          allow(Account).to receive(:find).with(account.id.to_s).and_return(account)
+          allow(account).to receive(:destroy).and_return(false)
+
+          delete api_v1_account_path(account.id), headers: token
+
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.accounts.destroy.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+
+      context "when does not find account" do
+        it "returns status :not_found and error message" do
+          user = create(:user)
+          token = access_token_for(user)
+          delete api_v1_account_path("fake-id"), headers: token
+
+          expect(response).to have_http_status(:not_found)
+          expect(response.parsed_body["error"]).to eq("Not found")
+        end
+      end
+
+      context "when account does not belong to user" do
+        it "returns status :unauthorized and error message" do
+          user = create(:user)
+          account = create(:account)
+          token = access_token_for(user)
+
+          delete api_v1_account_path(account.id), headers: token
+
+          expect(response).to have_http_status(:unauthorized)
+          expect(response.parsed_body["error"]).to eq("not allowed to destroy? this Account")
+        end
+      end
+    end
+  end
 end

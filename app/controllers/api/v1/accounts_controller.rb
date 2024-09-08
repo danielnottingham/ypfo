@@ -56,6 +56,26 @@ module Api
         end
       end
 
+      def destroy
+        authorize(account)
+        result = Accounts::Destroy.result(id: account.id.to_s)
+
+        if result.success?
+          success_response(
+            data: result.account,
+            serializer: Api::V1::AccountSerializer,
+            status: :ok,
+            message: I18n.t("api.v1.accounts.destroy.success")
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message: I18n.t("api.v1.accounts.destroy.failure")
+          )
+        end
+      end
+
       private
 
       def account

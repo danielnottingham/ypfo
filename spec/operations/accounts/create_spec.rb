@@ -25,9 +25,11 @@ RSpec.describe Accounts::Create, type: :operation do
           result = described_class.result(params: params)
         end.to change(Account, :count).by(1)
 
-        expect(result.account.attributes).to include({
-          "user_id" => user.id, "title" => "My account", "color" => "#ffffff"
-        })
+        expect(result.account.attributes).to include(
+          {
+            "user_id" => user.id, "title" => "My account", "color" => "#ffffff"
+          }
+        )
       end
     end
 
@@ -46,7 +48,7 @@ RSpec.describe Accounts::Create, type: :operation do
 
       it "does not create a new account" do
         expect do
-          result = described_class.result(params: { title: nil })
+          described_class.result(params: { title: nil })
         end.not_to change(Account, :count)
       end
     end
