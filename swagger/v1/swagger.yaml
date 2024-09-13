@@ -1,0 +1,8 @@
+---
+openapi: 3.0.1
+info:
+  title: YPFO API V1
+  version: v1
+servers:
+- url: http://localhost:3000
+  description: Servidor de desenvolvimento local
