@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_22_125721) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_14_163520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_125721) do
     t.index ["resource_owner_type", "resource_owner_id"], name: "index_devise_api_tokens_on_resource_owner"
   end
 
+  create_table "records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", limit: 70, null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "BRL", null: false
+    t.integer "record_type", null: false
+    t.date "occurred_in", null: false
+    t.string "payee"
+    t.text "description"
+    t.uuid "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_records_on_account_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -57,4 +71,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_125721) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "records", "accounts"
 end

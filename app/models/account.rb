@@ -3,6 +3,8 @@
 class Account < ApplicationRecord
   belongs_to :user
 
+  has_many :records, dependent: :destroy
+
   validates :balance_cents, presence: true
   validates :balance_currency, presence: true
   validates :color, presence: true
