@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    records/types:
+      expense: Despesa
+      income: Receita

@@ -20,4 +20,10 @@ RSpec.describe Record, type: :model do
 
     it { is_expected.to validate_numericality_of(:amount_cents).is_greater_than_or_equal_to(0) }
   end
+
+  describe ".enumerations" do
+    it "has enumerations for record_types" do
+      expect(described_class.enumerations).to include(record_type: Records::Types)
+    end
+  end
 end

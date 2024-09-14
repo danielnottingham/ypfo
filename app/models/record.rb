@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Record < ApplicationRecord
+  has_enumeration_for :record_type, with: Records::Types, create_helpers: true
+
   belongs_to :account
 
   validates :title, presence: true
