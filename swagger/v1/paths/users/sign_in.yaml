@@ -1,0 +1,30 @@
+post:
+  tags:
+    - Users
+  summary: Login do usuário
+  description: Faz o login do usuário e retorna um token(JWT), refresh_token(JWT), expires_in, token_type e as informações do usuário.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/auth.yaml#/RequestBody'
+  responses:
+    200:
+      description: Sucesso no login
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth.yaml#/LoginSuccess'
+    400:
+      description: Email inválido
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth.yaml#/LoginErrorInvalidEmail'
+    401:
+      description: Autenticação inválida
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth.yaml#/LoginErrorInvalidAuthentication'

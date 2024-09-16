@@ -1,8 +1,21 @@
 ---
 openapi: 3.0.1
+
 info:
   title: YPFO API V1
   version: v1
+
 servers:
 - url: http://localhost:3000
   description: Servidor de desenvolvimento local
+
+components:
+  schemas:
+    User:
+      $ref: "./components/schemas/user.yaml/#User"
+
+paths:
+  /users/tokens/sign_in:
+    $ref: "./paths/users/sign_in.yaml"
+  /users/tokens/sign_up:
+    $ref: "./paths/users/sign_up.yaml"

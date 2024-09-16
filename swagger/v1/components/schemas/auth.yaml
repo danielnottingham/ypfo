@@ -1,0 +1,113 @@
+RequestBody:
+  type: object
+  properties:
+    email:
+      type: string
+      example: "john.doe1@example.com"
+    password:
+      type: string
+      example: "123456"
+
+LoginSuccess:
+  type: object
+  properties:
+    token:
+      type: string
+    refresh_token:
+      type: string
+    expires_in:
+      type: integer
+    token_type:
+      type: string
+    resource_owner:
+      $ref: './user.yaml#User'
+  required:
+    - token
+    - refresh_token
+    - expires_in
+    - token_type
+    - resource_owner
+
+LoginErrorInvalidEmail:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "invalid_email"
+    error_description:
+      type: array
+      items:
+        type: string
+        example: "Email é inválido"
+
+LoginErrorInvalidAuthentication:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "invalid_authentication"
+    error_description:
+      type: array
+      items:
+        type: string
+        example: "Email ou senha inválidos"
+
+SignUpSuccess:
+  type: object
+  properties:
+    token:
+      type: string
+    refresh_token:
+      type: string
+    expires_in:
+      type: integer
+    token_type:
+      type: string
+    resource_owner:
+      $ref: './user.yaml#User'
+  required:
+    - token
+    - refresh_token
+    - expires_in
+    - token_type
+    - resource_owner
+
+SignUpErrorInvalidEmail:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "resource_owner_create_error"
+    error_description:
+      type: array
+      items:
+        type: string
+        example: "Email não é válido"
+
+SignUpErrorExistingUser:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "resource_owner_create_error"
+    error_description:
+      type: array
+      items:
+        type: string
+        examples:
+          - "Email já está em uso"
+          - "Password é muito curto (mínimo: 6 caracteres)"
+
+SignUpErrorBlankParameters:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "resource_owner_create_error"
+    error_description:
+      type: array
+      items:
+        type: string
+        examples:
+          - "Email não pode ficar em branco"
+          - "Password não pode ficar em branco"
