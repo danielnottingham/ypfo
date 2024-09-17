@@ -10,12 +10,26 @@ servers:
   description: Servidor de desenvolvimento local
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     User:
       $ref: "./components/schemas/user.yaml/#User"
+    Account:
+      $ref: "./components/schemas/account.yaml/#Account"
+
+security:
+  - bearerAuth: []
 
 paths:
+  /api/v1/accounts:
+    $ref: "./paths/accounts/index.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
+    security: []
   /users/tokens/sign_up:
     $ref: "./paths/users/sign_up.yaml"
+    security: []

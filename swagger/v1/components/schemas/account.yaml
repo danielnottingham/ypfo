@@ -1,0 +1,48 @@
+Account:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+    balance_cents:
+      type: integer
+    balance_currency:
+      type: string
+    color:
+      type: string
+    user_id:
+      type: string
+      format: uuid
+
+AccountArray:
+  type: object
+  properties:
+    accounts:
+      type: array
+      items:
+        $ref: "./account.yaml#/Account"
+
+AccountListResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Contas"
+    data:
+      $ref: "./account.yaml#/AccountArray"
+    pagination:
+      $ref: "./pagination.yaml#/Pagination"
+
+AccountUnauthorizedResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: invalid_token
+    error_description:
+      type: string
+      example: "Token inválido"
