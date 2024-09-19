@@ -3,6 +3,7 @@ Account:
   properties:
     id:
       type: string
+      format: uuid
     title:
       type: string
     balance_cents:
@@ -36,6 +37,34 @@ AccountListResponse:
       $ref: "./account.yaml#/AccountArray"
     pagination:
       $ref: "./pagination.yaml#/Pagination"
+
+AccountRequestBody:
+  type: object
+  properties:
+    title:
+      type: string
+      example: "Conta Teste"
+    color:
+      type: string
+      example: "#ffffff"
+
+AccountObjectResponse:
+  type: object
+  properties:
+    account:
+      $ref: "./account.yaml#/Account"
+
+AccountCreateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta criada com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
 
 AccountUnauthorizedResponse:
   type: object

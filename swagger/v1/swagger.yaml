@@ -26,7 +26,14 @@ security:
 
 paths:
   /api/v1/accounts:
-    $ref: "./paths/accounts/index.yaml"
+    get:
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/index.yaml"
+    post:
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/create.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []
