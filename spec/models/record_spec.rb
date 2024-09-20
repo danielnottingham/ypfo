@@ -3,6 +3,14 @@
 require "rails_helper"
 
 RSpec.describe Record, type: :model do
+  describe "monetization" do
+    it "monetizes amount attributes" do
+      record = described_class.new(amount_cents: 1000, amount_currency: "BRL")
+
+      expect(record.amount).to eq(Money.new(1000, "BRL"))
+    end
+  end
+
   describe "associations" do
     it { is_expected.to belong_to(:account) }
   end
