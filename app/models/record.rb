@@ -3,6 +3,8 @@
 class Record < ApplicationRecord
   has_enumeration_for :record_type, with: Records::Types, create_helpers: true
 
+  monetize :amount
+
   belongs_to :account
 
   validates :title, presence: true
