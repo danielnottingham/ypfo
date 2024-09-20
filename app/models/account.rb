@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
+  monetize :balance
+
   belongs_to :user
 
   has_many :records, dependent: :destroy
