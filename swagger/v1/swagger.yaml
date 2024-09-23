@@ -27,13 +27,21 @@ security:
 paths:
   /api/v1/accounts:
     get:
+      summary: Lista de contas
       tags:
         - Accounts
       $ref: "./paths/accounts/index.yaml"
     post:
+      summary: Criar uma conta
       tags:
         - Accounts
       $ref: "./paths/accounts/create.yaml"
+  /api/v1/accounts/{id}:
+    patch:
+      summary: Atualizar uma conta
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/update.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []

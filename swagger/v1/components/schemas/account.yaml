@@ -66,6 +66,18 @@ AccountCreateResponse:
     data:
       $ref: "./account.yaml#/AccountObjectResponse"
 
+AccountUpdateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta atualizada com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
+
 AccountUnauthorizedResponse:
   type: object
   properties:
@@ -75,3 +87,10 @@ AccountUnauthorizedResponse:
     error_description:
       type: string
       example: "Token inválido"
+
+AccountNotFoundResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: Not Found

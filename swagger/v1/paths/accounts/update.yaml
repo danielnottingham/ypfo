@@ -1,0 +1,59 @@
+summary: Atualizar uma conta
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+tags:
+  - Accounts
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/account.yaml#/AccountRequestBody"
+responses:
+  200:
+    description: Sucesso ao atualizar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountUpdateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountUnauthorizedResponse"
+  404:
+    description: Não encontrado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountNotFoundResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao atualizar conta.
+            errors:
+              type: object
+              properties:
+                title:
+                  type: array
+                  items:
+                    type: string
+                    example: não pode ficar em branco
+                color:
+                  type: array
+                  items:
+                    type: string
+                    example: não pode ficar em branco
