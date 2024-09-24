@@ -78,6 +78,18 @@ AccountUpdateResponse:
     data:
       $ref: "./account.yaml#/AccountObjectResponse"
 
+AccountDestroyResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta excluída com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
+
 AccountUnauthorizedResponse:
   type: object
   properties:
@@ -85,8 +97,10 @@ AccountUnauthorizedResponse:
       type: string
       example: invalid_token
     error_description:
-      type: string
-      example: "Token inválido"
+      type: array
+      items:
+        type: string
+        example: Token inválido
 
 AccountNotFoundResponse:
   type: object

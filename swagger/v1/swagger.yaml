@@ -42,6 +42,11 @@ paths:
       tags:
         - Accounts
       $ref: "./paths/accounts/update.yaml"
+    delete:
+      summary: Excluir uma conta
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/destroy.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []
