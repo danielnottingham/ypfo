@@ -1,0 +1,110 @@
+Account:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+    title:
+      type: string
+    balance_cents:
+      type: integer
+    balance_currency:
+      type: string
+    color:
+      type: string
+    user_id:
+      type: string
+      format: uuid
+
+AccountArray:
+  type: object
+  properties:
+    accounts:
+      type: array
+      items:
+        $ref: "./account.yaml#/Account"
+
+AccountListResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Contas"
+    data:
+      $ref: "./account.yaml#/AccountArray"
+    pagination:
+      $ref: "./pagination.yaml#/Pagination"
+
+AccountRequestBody:
+  type: object
+  properties:
+    title:
+      type: string
+      example: "Conta Teste"
+    color:
+      type: string
+      example: "#ffffff"
+
+AccountObjectResponse:
+  type: object
+  properties:
+    account:
+      $ref: "./account.yaml#/Account"
+
+AccountCreateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta criada com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
+
+AccountUpdateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta atualizada com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
+
+AccountDestroyResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Conta excluída com sucesso."
+    data:
+      $ref: "./account.yaml#/AccountObjectResponse"
+
+AccountUnauthorizedResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: invalid_token
+    error_description:
+      type: array
+      items:
+        type: string
+        example: Token inválido
+
+AccountNotFoundResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: Not Found

@@ -1,0 +1,39 @@
+Pagination:
+  type: object
+  properties:
+    scaffold_url:
+      type: string
+    first_url:
+      type: string
+    prev_url:
+      type: string
+    page_url:
+      type: string
+    next_url:
+      type: string
+    last_url:
+      type: string
+    count:
+      type: integer
+    page:
+      type: integer
+    limit:
+      type: integer
+    pages:
+      type: integer
+    from:
+      type: integer
+    to:
+      type: integer
+    prev:
+      type: integer
+      nullable: true
+    next:
+      type: integer
+      nullable: true
+    series:
+      type: array
+      items:
+        type: string
+    vars:
+      type: object

@@ -1,0 +1,55 @@
+---
+openapi: 3.0.1
+
+info:
+  title: YPFO API V1
+  version: v1
+
+servers:
+- url: http://localhost:3000
+  description: Servidor de desenvolvimento local
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      $ref: "./components/schemas/user.yaml/#User"
+    Account:
+      $ref: "./components/schemas/account.yaml/#Account"
+
+security:
+  - bearerAuth: []
+
+paths:
+  /api/v1/accounts:
+    get:
+      summary: Lista de contas
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/index.yaml"
+    post:
+      summary: Criar uma conta
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/create.yaml"
+  /api/v1/accounts/{id}:
+    patch:
+      summary: Atualizar uma conta
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/update.yaml"
+    delete:
+      summary: Excluir uma conta
+      tags:
+        - Accounts
+      $ref: "./paths/accounts/destroy.yaml"
+  /users/tokens/sign_in:
+    $ref: "./paths/users/sign_in.yaml"
+    security: []
+  /users/tokens/sign_up:
+    $ref: "./paths/users/sign_up.yaml"
+    security: []

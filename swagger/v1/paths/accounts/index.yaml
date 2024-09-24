@@ -1,0 +1,16 @@
+summary: Lista de contas
+tags:
+  - Accounts
+responses:
+  200:
+    description: Sucesso na listagem de contas
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/account.yaml#/AccountListResponse'
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/account.yaml#/AccountUnauthorizedResponse'

@@ -18,6 +18,7 @@ gem "pundit", "2.3.2"
 gem "rack-cors", "2.0.2"
 gem "rails", "7.1.3.4"
 gem "redis", "5.2.0"
+gem "rswag", "2.13.0"
 gem "service_actor", "3.9.2"
 gem "tzinfo-data", platforms: %i[windows jruby]
 

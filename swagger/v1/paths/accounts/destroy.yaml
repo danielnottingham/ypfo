@@ -1,0 +1,27 @@
+summary: Excluir uma conta
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+tags:
+  - Accounts
+responses:
+  200:
+    description: Sucesso ao excluir
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountDestroyResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountUnauthorizedResponse"
+  404:
+    description: Não encontrado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountNotFoundResponse"

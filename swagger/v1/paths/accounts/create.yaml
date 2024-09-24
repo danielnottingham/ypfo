@@ -1,0 +1,48 @@
+summary: Criar uma conta
+tags:
+  - Accounts
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/account.yaml#/AccountRequestBody"
+responses:
+  201:
+    description: Sucesso ao criar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountCreateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/account.yaml#/AccountUnauthorizedResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao criar conta.
+            errors:
+              type: object
+              properties:
+                title:
+                  type: array
+                  items:
+                    type: string
+                    example: não pode ficar em branco
+                color:
+                  type: array
+                  items:
+                    type: string
+                    example: não pode ficar em branco

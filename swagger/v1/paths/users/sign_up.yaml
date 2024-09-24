@@ -1,0 +1,37 @@
+post:
+  tags:
+    - Users
+  summary: Cadastro do usuário
+  description: Faz o cadastro do usuário e retorna um token(JWT), refresh_token(JWT), expires_in, token_type e as informações do usuário.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/auth.yaml#/RequestBody"
+  responses:
+    200:
+      description: Sucesso no cadastro
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/auth.yaml#/SignUpSuccess"
+    400:
+      description: Email inválido
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/auth.yaml#/SignUpErrorInvalidEmail"
+    401:
+      description: Autenticação inválida
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/auth.yaml#/SignUpErrorExistingUser"
+
+    422:
+      description: Dados inválidos
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/auth.yaml#/SignUpErrorBlankParameters"
