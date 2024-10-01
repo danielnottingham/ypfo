@@ -25,7 +25,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails", "6.4.3"
-  gem "rubocop-performance", "1.22.0"
+  gem "rubocop-performance", "1.22.1"
   gem "rubocop-rails", "2.26.2", require: false
 end
 
@@ -35,7 +35,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", "6.1.0"
-  gem "shoulda-matchers", "5.3.0"
+  gem "rspec-rails", "7.0.1"
+  gem "shoulda-matchers", "6.4.0"
   gem "simplecov", "0.22.0", require: false
 end
