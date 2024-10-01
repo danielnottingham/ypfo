@@ -17,8 +17,8 @@ gem "puma", "6.4.3"
 gem "pundit", "2.4.0"
 gem "rack-cors", "2.0.2"
 gem "rails", "7.1.4"
-gem "redis", "5.2.0"
-gem "rswag", "2.13.0"
+gem "redis", "5.3.0"
+gem "rswag", "2.14.0"
 gem "service_actor", "3.9.2"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
