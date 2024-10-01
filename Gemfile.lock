@@ -88,7 +88,7 @@ GEM
     bigdecimal (3.1.8)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (6.1.2)
+    brakeman (6.2.1)
       racc
     builder (3.3.0)
     case_transform (0.2)
@@ -374,7 +374,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (= 0.10.14)
   bootsnap (= 1.18.4)
-  brakeman (= 6.1.2)
+  brakeman (= 6.2.1)
   debug
   devise (= 4.9.4)
   devise-api (= 0.1.3)
