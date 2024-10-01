@@ -24,6 +24,7 @@ gem "service_actor", "3.9.4"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
+  gem "bullet", "7.2.0"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails", "6.4.3"
   gem "rubocop-performance", "1.22.1"
