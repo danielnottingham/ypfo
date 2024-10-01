@@ -19,14 +19,14 @@ gem "rack-cors", "2.0.2"
 gem "rails", "7.1.4"
 gem "redis", "5.3.0"
 gem "rswag", "2.14.0"
-gem "service_actor", "3.9.2"
+gem "service_actor", "3.9.4"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
-  gem "factory_bot_rails", "6.2.0"
-  gem "rubocop-performance", "1.21.0"
-  gem "rubocop-rails", "2.25.1", require: false
+  gem "factory_bot_rails", "6.4.3"
+  gem "rubocop-performance", "1.22.0"
+  gem "rubocop-rails", "2.26.2", require: false
 end
 
 group :development do
