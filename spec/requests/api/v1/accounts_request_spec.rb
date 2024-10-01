@@ -280,7 +280,7 @@ RSpec.describe "Accounts" do
           delete api_v1_account_path(account.id), headers: token
 
           expect(response).to have_http_status(:unauthorized)
-          expect(response.parsed_body["error"]).to eq("not allowed to destroy? this Account")
+          expect(response.parsed_body["error"]).to eq("not allowed to AccountPolicy#destroy? this Account")
         end
       end
     end
