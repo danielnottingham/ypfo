@@ -20,6 +20,8 @@ components:
       $ref: "./components/schemas/user.yaml/#User"
     Account:
       $ref: "./components/schemas/account.yaml/#Account"
+    Record:
+      $ref: "./components/schemas/record.yaml/#Record"
 
 security:
   - bearerAuth: []
@@ -47,6 +49,12 @@ paths:
       tags:
         - Accounts
       $ref: "./paths/accounts/destroy.yaml"
+  /api/v1/records:
+    get:
+      summary: Lista de transações
+      tags:
+        - Records
+      $ref: "./paths/records/index.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []

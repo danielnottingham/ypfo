@@ -1,0 +1,23 @@
+summary: Lista de transações
+tags:
+  - Records
+parameters:
+  - in: query
+    name: page
+    schema:
+      type: integer
+      minimum: 1
+    description: Número da página
+responses:
+  200:
+    description: Sucesso na listagem de transações
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/record.yaml#/RecordListResponse'
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/record.yaml#/RecordUnauthorizedResponse'
