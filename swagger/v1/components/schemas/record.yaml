@@ -1,0 +1,58 @@
+Record:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+    title:
+      type: string
+    amount_cents:
+      type: integer
+    amount_currency:
+      type: string
+    record_type:
+      type: integer
+    occurred_in:
+      type: string
+      format: date
+    payee:
+      type: string
+    description:
+      type: string
+    account_id:
+      type: string
+      format: uuid
+
+RecordArray:
+  type: object
+  properties:
+    records:
+      type: array
+      items:
+        $ref: "./record.yaml#/Record"
+
+RecordListResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: Transações
+    data:
+      $ref: "./record.yaml#/RecordArray"
+    pagination:
+      $ref: "./pagination.yaml#/Pagination"
+
+RecordUnauthorizedResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: invalid_token
+    error_description:
+      type: array
+      items:
+        type: string
+        example: Token inválido
