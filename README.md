@@ -10,14 +10,26 @@
 2. Navegue até o diretório raiz do aplicativo.
 3. Crie um arquivo .env baseado no .env.example
 ```
-$ cp .env.example .env
+cp .env.example .env
 ```
 5. Execute o comando bundle install
-6. Depois execute o comando para subir os serviços `docker compose up -d`
-7. Por fim, execute o comando para subir o servidor `rails server`
+6. Execute o comando para subir os serviços:
+```
+docker compose up -d
+```
+7. Suba o servidor:
+```
+docker compose up -d
+```
+
+## Rodando os Testes
+Para garantir que tudo está funcionando corretamente e o código não quebre com novas implementações, você pode rodar os testes com o seguinte comando:
+```
+bundle exec rspec
+```
+Certifique-se de que todos os testes estão passando antes de submeter alterações.
 
 ## Scripts para desenvolvimento:
-
 ```
 O comando bin/analyze: Executa outros dois scripts.
 
