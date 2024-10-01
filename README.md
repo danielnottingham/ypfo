@@ -12,14 +12,14 @@
 ```
 cp .env.example .env
 ```
-5. Execute o comando bundle install
+5. Execute o comando `bundle install`
 6. Execute o comando para subir os serviços:
 ```
 docker compose up -d
 ```
 7. Suba o servidor:
 ```
-docker compose up -d
+bin/rails server
 ```
 
 ## Rodando os Testes
