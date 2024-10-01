@@ -22,6 +22,10 @@ docker compose up -d
 bin/rails server
 ```
 
+## Acessando a Documentação da API
+Você pode visualizar todos os endpoints disponíveis no projeto através do Swagger. Após iniciar o servidor, navegue até:
+http://localhost:3000/api-docs/index.html
+
 ## Rodando os Testes
 Para garantir que tudo está funcionando corretamente e o código não quebre com novas implementações, você pode rodar os testes com o seguinte comando:
 ```
