@@ -1,7 +1,7 @@
 ![example workflow](https://github.com/danielnottingham/ypfo/actions/workflows/ci.yml/badge.svg)
 
 ## Requerimentos:
-- Ruby 3.2.2
+- Ruby 3.3.5
 - Docker
 - Docker-Compose
 
@@ -38,9 +38,9 @@ Certifique-se de que todos os testes estão passando antes de submeter alteraç�
 O comando bin/analyze: Executa outros dois scripts.
 
 bin/lint que roda esses dois comandos.
-- bundle exec rubocop -A (Rubocop: Analisa o estilo e a conformidade do código Ruby com as boas práticas da comunidade.)
+- bundle exec bin/rubocop -A (Rubocop: Analisa o estilo e a conformidade do código Ruby com as boas práticas da comunidade.)
 - bundle exec reek (Detecta maus odores de código (code smells) em arquivos Ruby, ajudando a manter o código limpo e legível.)
 
 bin/scan
-- bundle exec brakeman (Faz análise estática de segurança para aplicações Ruby on Rails, identificando possíveis vulnerabilidades.)
+- bundle exec bin/brakeman (Faz análise estática de segurança para aplicações Ruby on Rails, identificando possíveis vulnerabilidades.)
 ```
