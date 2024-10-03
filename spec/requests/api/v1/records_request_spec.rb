@@ -68,4 +68,70 @@ RSpec.describe "Records" do
       end
     end
   end
+
+  describe "POST /api/v1/records" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        post api_v1_records_path
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "when params are valid" do
+        it "returns status :created with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = attributes_for(:record, account_id: account.id)
+
+          post api_v1_records_path, headers: token, params: { record: params }
+
+          expect(response).to have_http_status(:created)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.create.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+
+        it "returns parsed_body data" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = attributes_for(:record, account_id: account.id)
+
+          post api_v1_records_path, headers: token, params: { record: params }
+
+          expect(response.parsed_body["data"]).to include(
+            "record" => {
+              "id" => anything,
+              "title" => params[:title],
+              "amount_cents" => Record.last.amount.format,
+              "amount_currency" => params[:amount_currency],
+              "record_type" => params[:record_type],
+              "occurred_in" => params[:occurred_in].strftime("%d/%m/%Y"),
+              "payee" => params[:payee],
+              "description" => params[:description],
+              "account_id" => account.id
+            }
+          )
+        end
+      end
+
+      context "when params are invalid" do
+        it "returns status :unprocessable_entity with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = attributes_for(:record, account_id: account.id, title: nil)
+
+          post api_v1_records_path, headers: token, params: { record: params }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.create.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end

@@ -35,4 +35,16 @@ RSpec.describe RecordPolicy do
       expect(described_class.new(nil, Record).index?).to be false
     end
   end
+
+  describe "#create?" do
+    it "returns true for user" do
+      user = create(:user)
+
+      expect(described_class.new(user, Record).create?).to be true
+    end
+
+    it "returns false for unregistered user" do
+      expect(described_class.new(nil, Record).create?).to be false
+    end
+  end
 end
