@@ -56,3 +56,48 @@ RecordUnauthorizedResponse:
       items:
         type: string
         example: Token inválido
+
+RecordRequestBody:
+  type: object
+  properties:
+    title:
+      type: string
+      example: "Transação de teste"
+    amount_cents:
+      type: integer
+      example: 1
+    amount_currency:
+      type: string
+      example: BRL
+    record_type:
+      type: integer
+      example: 1
+    occurred_in:
+      type: string
+      example: "2024-10-10"
+    payee:
+      type: string
+      example: "Payee"
+    description:
+      type: string
+    account_id:
+      type: string
+      example: "123e4567-e89b-12d3-a456-426655440000"
+
+RecordCreateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Transação criada com sucesso."
+    data:
+      $ref: "./record.yaml#/RecordObjectResponse"
+
+RecordObjectResponse:
+  type: object
+  properties:
+    record:
+      $ref: "./record.yaml#/Record"

@@ -55,6 +55,11 @@ paths:
       tags:
         - Records
       $ref: "./paths/records/index.yaml"
+    post:
+      summary: Criar uma transação
+      tags:
+        - Records
+      $ref: "./paths/records/create.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []

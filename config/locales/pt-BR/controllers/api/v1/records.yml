@@ -1,0 +1,7 @@
+pt-BR:
+  api:
+    v1:
+      records:
+        create:
+          success: Transação criada com sucesso.
+          failure: Falha ao criar transação.
