@@ -1,7 +1,7 @@
 ![example workflow](https://github.com/danielnottingham/ypfo/actions/workflows/ci.yml/badge.svg)
 
 ## Requerimentos:
-- Ruby 3.3.5
+- Ruby 3.3.5 (apenas para desenvolvimento local, o Docker cuida das versões)
 - Docker
 - Docker-Compose
 
@@ -15,7 +15,7 @@ cp .env.example .env
 5. Execute o comando `bundle install`
 6. Execute o comando para subir os serviços:
 ```
-docker compose up -d
+docker compose up --build -d
 ```
 7. Suba o servidor:
 ```
