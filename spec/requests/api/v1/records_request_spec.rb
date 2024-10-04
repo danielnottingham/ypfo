@@ -131,6 +131,19 @@ RSpec.describe "Records" do
           expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.create.failure"))
           expect(response.parsed_body["status"]).to eq("error")
         end
+
+        it "returns errors" do
+          user = create(:user)
+          account = create(:account, user: user)
+          token = access_token_for(user)
+          params = attributes_for(:record, account_id: account.id, title: nil, occurred_in: nil)
+
+          post api_v1_records_path, headers: token, params: { record: params }
+
+          expect(response.parsed_body["errors"]).to eq(
+            ["Título não pode ficar em branco", "Data não pode ficar em branco"]
+          )
+        end
       end
     end
   end

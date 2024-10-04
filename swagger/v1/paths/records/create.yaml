@@ -1,0 +1,40 @@
+summary: Criar uma transação
+tags:
+  - Records
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/record.yaml#/RecordRequestBody"
+responses:
+  201:
+    description: Sucesso ao criar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/record.yaml#/RecordCreateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/record.yaml#/RecordUnauthorizedResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao criar transação.
+            errors:
+              type: array
+              items:
+                type: string
+                example: "Título não pode ficar em branco"
