@@ -10,12 +10,24 @@
 2. Navegue até o diretório raiz do aplicativo.
 3. Crie um arquivo .env baseado no .env.example
 ```
+# ambiente de desenvolvimento
 cp .env.example .env
+# ambiente de testes
+cp .env.test.example .env.test
 ```
 5. Execute o comando `bundle install`
 6. Execute o comando para subir os serviços:
 ```
 docker compose up --build -d
+
+# executar os serviços com o ambiente de desenvolvimento
+docker compose --env-file .env up -d
+
+# executar os serviços com o ambiente de testes
+docker compose --env-file .env.test up -d
+
+# executar os testes após após subir os serviços no ambiente de testes.
+docker compose exec app bundle exec rspec
 ```
 7. Suba o servidor:
 ```
