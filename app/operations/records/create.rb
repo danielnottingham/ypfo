@@ -9,7 +9,12 @@ module Records
     def call
       self.record = Record.new(params)
 
-      fail!(error: record.errors.full_messages) unless record.save
+      ActiveRecord::Base.transaction do
+        record.save!
+        Accounts::UpdateBalance.call(id: record.account_id)
+      rescue StandardError => e
+        fail!(error: e.message)
+      end
     end
   end
 end

@@ -141,7 +141,7 @@ RSpec.describe "Records" do
           post api_v1_records_path, headers: token, params: { record: params }
 
           expect(response.parsed_body["errors"]).to eq(
-            ["Título não pode ficar em branco", "Data não pode ficar em branco"]
+            "A validação falhou: Título não pode ficar em branco, Data não pode ficar em branco"
           )
         end
       end

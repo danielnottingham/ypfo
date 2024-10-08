@@ -35,6 +35,15 @@ RSpec.describe Records::Create, type: :operation do
           }
         )
       end
+
+      it "updates the account balance" do
+        account = create(:account)
+        record_attributes = attributes_for(:record, :expense, account: account, amount_cents: 1000)
+
+        expect do
+          described_class.result(params: record_attributes)
+        end.to change { account.reload.balance_cents }.from(0).to(-1000)
+      end
     end
 
     context "with invalid attributes" do
@@ -57,6 +66,17 @@ RSpec.describe Records::Create, type: :operation do
         expect do
           described_class.result(params: { title: nil })
         end.not_to change(Record, :count)
+      end
+    end
+
+    context "when account updates balance fails" do
+      it "rollbacks record creation" do
+        account = create(:account)
+        record_attributes = attributes_for(:record, :expense, account: account, amount_cents: 1000)
+
+        allow(Accounts::UpdateBalance).to receive(:call).with(id: account.id).and_raise("Some error")
+
+        expect { described_class.result(params: record_attributes) }.not_to change(Record, :count)
       end
     end
   end

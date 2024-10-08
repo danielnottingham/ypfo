@@ -13,6 +13,10 @@ detectors:
     accept:
       - V1
 
+  UncommunicativeVariableName:
+    accept:
+      - e
+
   NestedIterators:
     exclude:
       - "MyWorker#self.class_method" # should be refactored
