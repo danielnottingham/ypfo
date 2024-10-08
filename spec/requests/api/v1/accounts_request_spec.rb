@@ -234,16 +234,6 @@ RSpec.describe "Accounts" do
         expect(response.parsed_body["status"]).to eq("success")
       end
 
-      it "returns parsed_body data" do
-        user = create(:user)
-        account = create(:account, user: user)
-        token = access_token_for(user)
-
-        delete api_v1_account_path(account.id), headers: token
-
-        expect(response.parsed_body["data"]["account"]["id"]).to eq(account.id)
-      end
-
       context "when account cannot be destroyed" do
         it "returns status :unprocessable_content with parsed_body message and status" do
           user = create(:user)

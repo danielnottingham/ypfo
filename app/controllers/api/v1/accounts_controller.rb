@@ -62,8 +62,6 @@ module Api
 
         if result.success?
           success_response(
-            data: result.account,
-            serializer: Api::V1::AccountSerializer,
             status: :ok,
             message_key: "api.v1.accounts.destroy.success"
           )

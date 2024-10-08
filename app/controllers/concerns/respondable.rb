@@ -4,7 +4,8 @@ module Respondable
   extend ActiveSupport::Concern
 
   def success_response(data: nil, status: :ok, message_key: nil, serializer: nil, pagination: nil)
-    response = { status: "success", message: I18n.t(message_key), data: formated_response(data, serializer) }
+    response = { status: "success", message: I18n.t(message_key) }
+    response[:data] = formated_response(data, serializer) if data
     response[:pagination] = pagination if pagination.present?
 
     render json: response, status: status

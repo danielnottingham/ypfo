@@ -87,8 +87,6 @@ AccountDestroyResponse:
     message:
       type: string
       example: "Conta excluída com sucesso."
-    data:
-      $ref: "./account.yaml#/AccountObjectResponse"
 
 AccountUnauthorizedResponse:
   type: object
