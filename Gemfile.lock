@@ -393,6 +393,7 @@ DEPENDENCIES
   ostruct (= 0.6.0)
   pagy (= 9.0.9)
   pg (= 1.5.8)
+  pry (= 0.14.2)
   pry-rails (= 0.3.11)
   puma (= 6.4.3)
   pundit (= 2.4.0)
