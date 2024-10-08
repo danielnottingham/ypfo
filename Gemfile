@@ -27,6 +27,7 @@ group :development, :test do
   gem "bullet", "7.2.0"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails", "6.4.3"
+  gem "pry", "0.14.2"
   gem "pry-rails", "0.3.11"
   gem "rubocop-performance", "1.22.1"
   gem "rubocop-rails", "2.26.2", require: false

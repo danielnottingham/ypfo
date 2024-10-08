@@ -10,7 +10,7 @@ module Api
 
         success_response(
           data: records,
-          message: I18n.t("activerecord.models.record.other"),
+          message_key: "activerecord.models.record.other",
           serializer: Api::V1::RecordSerializer,
           pagination: pagy_metadata(pagy)
         )
@@ -24,14 +24,14 @@ module Api
           success_response(
             data: result.record,
             status: :created,
-            message: I18n.t("api.v1.records.create.success"),
+            message_key: "api.v1.records.create.success",
             serializer: Api::V1::RecordSerializer
           )
         else
           error_response(
             errors: result.error,
             status: :unprocessable_content,
-            message: I18n.t("api.v1.records.create.failure")
+            message_key: "api.v1.records.create.failure"
           )
         end
       end

@@ -11,7 +11,7 @@ module Api
         success_response(
           data: accounts,
           serializer: Api::V1::AccountSerializer,
-          message: I18n.t("activerecord.models.account.other"),
+          message_key: "activerecord.models.account.other",
           pagination: pagy_metadata(pagy)
         )
       end
@@ -25,13 +25,13 @@ module Api
             data: result.account,
             serializer: Api::V1::AccountSerializer,
             status: :created,
-            message: I18n.t("api.v1.accounts.create.success")
+            message_key: "api.v1.accounts.create.success"
           )
         else
           error_response(
             errors: result.error,
             status: :unprocessable_content,
-            message: I18n.t("api.v1.accounts.create.failure")
+            message_key: "api.v1.accounts.create.failure"
           )
         end
       end
@@ -45,13 +45,13 @@ module Api
             data: result.account,
             serializer: Api::V1::AccountSerializer,
             status: :ok,
-            message: I18n.t("api.v1.accounts.update.success")
+            message_key: "api.v1.accounts.update.success"
           )
         else
           error_response(
             errors: result.error,
             status: :unprocessable_content,
-            message: I18n.t("api.v1.accounts.update.failure")
+            message_key: "api.v1.accounts.update.failure"
           )
         end
       end
@@ -62,16 +62,14 @@ module Api
 
         if result.success?
           success_response(
-            data: result.account,
-            serializer: Api::V1::AccountSerializer,
             status: :ok,
-            message: I18n.t("api.v1.accounts.destroy.success")
+            message_key: "api.v1.accounts.destroy.success"
           )
         else
           error_response(
             errors: result.error,
             status: :unprocessable_content,
-            message: I18n.t("api.v1.accounts.destroy.failure")
+            message_key: "api.v1.accounts.destroy.failure"
           )
         end
       end

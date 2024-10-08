@@ -3,15 +3,16 @@
 module Respondable
   extend ActiveSupport::Concern
 
-  def success_response(data:, status: :ok, message: nil, serializer: nil, pagination: nil)
-    response = { status: "success", message: message, data: formated_response(data, serializer) }
+  def success_response(data: nil, status: :ok, message_key: nil, serializer: nil, pagination: nil)
+    response = { status: "success", message: I18n.t(message_key) }
+    response[:data] = formated_response(data, serializer) if data
     response[:pagination] = pagination if pagination.present?
 
     render json: response, status: status
   end
 
-  def error_response(errors:, status: :unprocessable_content, message: nil)
-    response = { status: "error", message: message, errors: errors }
+  def error_response(errors:, status: :unprocessable_content, message_key: nil)
+    response = { status: "error", message: I18n.t(message_key), errors: errors }
 
     render json: response, status: status
   end
