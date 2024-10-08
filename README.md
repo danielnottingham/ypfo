@@ -29,10 +29,6 @@ docker compose --env-file .env.test up -d
 # executar os testes após após subir os serviços no ambiente de testes.
 docker compose exec app bundle exec rspec
 ```
-7. Suba o servidor:
-```
-bin/rails server
-```
 
 ## Acessando a Documentação da API
 Você pode visualizar todos os endpoints disponíveis no projeto através do Swagger. Após iniciar o servidor, navegue até:
