@@ -147,4 +147,73 @@ RSpec.describe "Records" do
       end
     end
   end
+
+  describe "PATCH /api/v1/records/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        record = create(:record)
+
+        patch api_v1_record_path(record)
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "when params are valid" do
+        it "returns status :ok with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account)
+          params = { title: "Updated Record Title" }
+
+          patch api_v1_record_path(record), headers: access_token_for(user), params: { record: params }
+
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.update.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+
+        it "returns parsed_body data" do
+          user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account, title: "Record 1")
+          params = { title: "Updated Record Title" }
+
+          patch api_v1_record_path(record), headers: access_token_for(user), params: { record: params }
+
+          expect(response.parsed_body["data"]).to include(
+            "record" => {
+              "id" => record.id,
+              "title" => params[:title],
+              "amount_cents" => Record.last.amount.format,
+              "amount_currency" => Record.last.amount.currency,
+              "record_type" => Record.last.record_type,
+              "occurred_in" => Record.last.occurred_in.strftime("%d/%m/%Y"),
+              "payee" => Record.last.payee,
+              "description" => Record.last.description,
+              "account_id" => account.id
+            }
+          )
+        end
+      end
+
+      context "when params are invalid" do
+        it "returns status :unprocessable_entity with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account)
+          params = { title: nil }
+
+          patch api_v1_record_path(record), headers: access_token_for(user), params: { record: params }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.update.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+          expect(response.parsed_body["errors"]).to eq("A validação falhou: Título não pode ficar em branco")
+        end
+      end
+    end
+  end
 end
