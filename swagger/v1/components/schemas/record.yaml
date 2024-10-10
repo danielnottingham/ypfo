@@ -101,3 +101,22 @@ RecordObjectResponse:
   properties:
     record:
       $ref: "./record.yaml#/Record"
+
+RecordUpdateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Transação atualizada com sucesso."
+    data:
+      $ref: "./record.yaml#/RecordObjectResponse"
+
+RecordNotFoundResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: Not Found

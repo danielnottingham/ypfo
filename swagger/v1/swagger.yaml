@@ -6,8 +6,8 @@ info:
   version: v1
 
 servers:
-- url: http://localhost:3000
-  description: Servidor de desenvolvimento local
+  - url: http://localhost:3000
+    description: Servidor de desenvolvimento local
 
 components:
   securitySchemes:
@@ -60,6 +60,12 @@ paths:
       tags:
         - Records
       $ref: "./paths/records/create.yaml"
+  /api/v1/records/{id}:
+    patch:
+      summary: Atualizar uma transação
+      tags:
+        - Records
+      $ref: "./paths/records/update.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []

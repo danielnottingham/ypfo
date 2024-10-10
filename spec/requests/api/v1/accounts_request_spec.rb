@@ -62,7 +62,7 @@ RSpec.describe "Accounts" do
               {
                 "id" => account_one.id,
                 "title" => account_one.title,
-                "balance_cents" => account_one.balance_cents,
+                "balance_cents" => account_one.balance.format,
                 "balance_currency" => account_one.balance_currency,
                 "color" => account_one.color,
                 "user_id" => account_one.user_id
@@ -70,7 +70,7 @@ RSpec.describe "Accounts" do
               {
                 "id" => account_two.id,
                 "title" => account_two.title,
-                "balance_cents" => account_two.balance_cents,
+                "balance_cents" => account_two.balance.format,
                 "balance_currency" => account_two.balance_currency,
                 "color" => account_two.color,
                 "user_id" => account_two.user_id

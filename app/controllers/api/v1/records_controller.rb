@@ -36,7 +36,31 @@ module Api
         end
       end
 
+      def update
+        authorize(record)
+        result = Records::Update.result(id: record.id.to_s, params: record_params)
+
+        if result.success?
+          success_response(
+            data: result.record,
+            serializer: Api::V1::RecordSerializer,
+            status: :ok,
+            message_key: "api.v1.records.update.success"
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message_key: "api.v1.records.update.failure"
+          )
+        end
+      end
+
       private
+
+      def record
+        @record ||= Records::Find.result(id: params[:id]).record
+      end
 
       def record_params
         params.require(:record).permit(

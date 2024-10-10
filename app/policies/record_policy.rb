@@ -23,4 +23,14 @@ class RecordPolicy < ApplicationPolicy
   def create?
     user.present?
   end
+
+  def update?
+    user.present? && owner?
+  end
+
+  private
+
+  def owner?
+    user == record.account.user
+  end
 end

@@ -1,0 +1,49 @@
+summary: Atualizar uma transação
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+tags:
+  - Records
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/record.yaml#/RecordRequestBody"
+responses:
+  200:
+    description: Sucesso ao atualizar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/record.yaml#/RecordUpdateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/record.yaml#/RecordUnauthorizedResponse"
+  404:
+    description: Não encontrado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/record.yaml#/RecordNotFoundResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao atualizar conta.
+            errors:
+              type: string
+              example: "A validação falhou: Título não pode ficar em branco, Data não pode ficar em branco"
