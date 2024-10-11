@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :record do
     transient { user { create(:user) } }
     account { association :account, user: user }
+    category { association :category, user: user }
 
     sequence(:title) { |n| "Record #{n}" }
     amount_cents { 1000 }
