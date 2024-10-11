@@ -66,6 +66,11 @@ paths:
       tags:
         - Records
       $ref: "./paths/records/update.yaml"
+    delete:
+      summary: Excluir uma transação
+      tags:
+        - Records
+      $ref: "./paths/records/destroy.yaml"
   /users/tokens/sign_in:
     $ref: "./paths/users/sign_in.yaml"
     security: []

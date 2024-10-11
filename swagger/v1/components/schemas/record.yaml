@@ -120,3 +120,13 @@ RecordNotFoundResponse:
     error:
       type: string
       example: Not Found
+
+RecordDestroyResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Transação excluída com sucesso."
