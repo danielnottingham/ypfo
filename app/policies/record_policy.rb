@@ -9,7 +9,7 @@ class RecordPolicy < ApplicationPolicy
 
     def resolve
       if user.present?
-        scope.joins(:account).where(accounts: { user: })
+        scope.joins(:account).where(accounts: { user_id: user.id })
       else
         scope.none
       end
@@ -28,9 +28,13 @@ class RecordPolicy < ApplicationPolicy
     user.present? && owner?
   end
 
+  def destroy?
+    update?
+  end
+
   private
 
   def owner?
-    user == record.account.user
+    user.id == record.account.user_id
   end
 end

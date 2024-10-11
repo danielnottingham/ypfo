@@ -70,4 +70,27 @@ RSpec.describe RecordPolicy do
       expect(described_class.new(nil, Record).update?).to be false
     end
   end
+
+  describe "#destroy?" do
+    it "returns true for owner" do
+      user = create(:user)
+      account = create(:account, user: user)
+      record = create(:record, account: account)
+
+      expect(described_class.new(user, record).destroy?).to be true
+    end
+
+    it "returns false for non owner" do
+      user = create(:user)
+      record_owner = create(:user)
+      account = create(:account, user: record_owner)
+      record = create(:record, account: account)
+
+      expect(described_class.new(user, record).destroy?).to be false
+    end
+
+    it "returns false for unregistered user" do
+      expect(described_class.new(nil, Record).destroy?).to be false
+    end
+  end
 end

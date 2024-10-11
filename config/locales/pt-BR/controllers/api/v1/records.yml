@@ -8,3 +8,6 @@ pt-BR:
         update:
           success: Transação atualizada com sucesso.
           failure: Falha ao atualizar transação.
+        destroy:
+          success: Transação excluída com sucesso.
+          failure: Falha ao excluir transação.
