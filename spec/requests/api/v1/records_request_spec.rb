@@ -216,4 +216,77 @@ RSpec.describe "Records" do
       end
     end
   end
+
+  describe "DELETE /api/v1/records/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        record = create(:record)
+
+        delete api_v1_record_path(record)
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "when record exists and can be deleted" do
+        it "returns status :ok with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account)
+          token = access_token_for(user)
+
+          delete api_v1_record_path(record), headers: token
+
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.destroy.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+      end
+
+      context "when does not find the record" do
+        it "returns status :not_found and error message" do
+          user = create(:user)
+          token = access_token_for(user)
+          delete api_v1_record_path("fake-id"), headers: token
+
+          expect(response).to have_http_status(:not_found)
+          expect(response.parsed_body["error"]).to eq("Not found")
+        end
+      end
+
+      context "when record does not belong to user" do
+        it "returns status unauthorized with parsed_body error message" do
+          user = create(:user)
+          another_user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account)
+          token = access_token_for(another_user)
+
+          delete api_v1_record_path(record), headers: token
+
+          expect(response).to have_http_status(:unauthorized)
+          expect(response.parsed_body["error"]).to eq("not allowed to RecordPolicy#destroy? this Record")
+        end
+      end
+
+      context "when record cannot be destroyed" do
+        it "returns status :unprocessable_content with parsed_body message and status" do
+          user = create(:user)
+          account = create(:account, user: user)
+          record = create(:record, account: account)
+          token = access_token_for(user)
+          allow(Record).to receive(:find).with(record.id.to_s).and_return(record)
+          allow(record).to receive(:destroy).and_return(false)
+
+          delete api_v1_record_path(record), headers: token
+
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.records.destroy.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end

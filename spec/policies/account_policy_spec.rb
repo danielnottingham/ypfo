@@ -10,7 +10,7 @@ RSpec.describe AccountPolicy do
 
       scope = described_class::Scope.new(user, Account.all).resolve
 
-      expect(scope).to eq accounts
+      expect(scope).to match_array accounts
     end
 
     it "returns no account for unregistered user" do

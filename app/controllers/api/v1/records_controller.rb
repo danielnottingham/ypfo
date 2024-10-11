@@ -56,6 +56,24 @@ module Api
         end
       end
 
+      def destroy
+        authorize(record)
+        result = Records::Destroy.result(id: record.id.to_s)
+
+        if result.success?
+          success_response(
+            status: :ok,
+            message_key: "api.v1.records.destroy.success"
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message_key: "api.v1.records.destroy.failure"
+          )
+        end
+      end
+
       private
 
       def record
