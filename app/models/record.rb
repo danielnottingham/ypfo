@@ -6,6 +6,7 @@ class Record < ApplicationRecord
   monetize :amount
 
   belongs_to :account
+  belongs_to :category, optional: true
 
   validates :title, presence: true
   validates :amount_cents, presence: true
