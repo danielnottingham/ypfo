@@ -49,6 +49,12 @@ paths:
       tags:
         - Accounts
       $ref: "./paths/accounts/destroy.yaml"
+  /api/v1/categories:
+    get:
+      summary: Lista de categorias
+      tags:
+        - Categories
+      $ref: "./paths/categories/index.yaml"
   /api/v1/records:
     get:
       summary: Lista de transações
