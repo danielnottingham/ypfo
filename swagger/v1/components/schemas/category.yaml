@@ -1,0 +1,47 @@
+Category:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+    title:
+      type: string
+    color:
+      type: string
+    user_id:
+      type: string
+      format: uuid
+
+CategoryListResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Categorias"
+    data:
+      $ref: "./category.yaml#/CategoryArray"
+    pagination:
+      $ref: "./pagination.yaml#/Pagination"
+
+CategoryArray:
+  type: object
+  properties:
+    categories:
+      type: array
+      items:
+        $ref: "./category.yaml#/Category"
+
+CategoryUnauthorizedResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: invalid_token
+    error_description:
+      type: array
+      items:
+        type: string
+        example: Token inválido

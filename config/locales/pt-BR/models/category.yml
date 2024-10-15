@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      record:
+      category:
         one: Categoria
         other: Categorias
 
