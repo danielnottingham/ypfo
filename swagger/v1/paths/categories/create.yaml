@@ -1,0 +1,39 @@
+summary: Criar uma categoria
+tags:
+  - Categories
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/category.yaml#/CategoryRequestBody"
+responses:
+  201:
+    description: Sucesso ao criar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/category.yaml#/CategoryCreateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/category.yaml#/CategoryUnauthorizedResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao criar categoria.
+            errors:
+              items:
+                type: string
+                example: Título não pode ficar em branco

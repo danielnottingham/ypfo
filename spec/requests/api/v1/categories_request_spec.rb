@@ -59,4 +59,64 @@ RSpec.describe "Categories" do
       end
     end
   end
+
+  describe "POST /api/v1/categories" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        post api_v1_categories_path
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "when params are valid" do
+        it "returns status :created with parsed_body message and status" do
+          user = create(:user)
+          token = access_token_for(user)
+          attributes = attributes_for(:category)
+          params = attributes.merge(user: user)
+
+          post api_v1_categories_path, headers: token, params: { category: params }
+
+          expect(response).to have_http_status(:created)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.create.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+
+        it "returns parsed_body data" do
+          user = create(:user)
+          token = access_token_for(user)
+          attributes = attributes_for(:category, title: "Category 1", color: "#ffffff")
+          params = attributes.merge(user: user)
+
+          post api_v1_categories_path, headers: token, params: { category: params }
+
+          expect(response.parsed_body["data"]).to include(
+            "category" => {
+              "id" => anything,
+              "title" => "Category 1",
+              "color" => "#ffffff",
+              "user_id" => user.id
+            }
+          )
+        end
+      end
+
+      context "when params are invalid" do
+        it "returns status :unprocessable_entity with parsed_body message and status" do
+          user = create(:user)
+          token = access_token_for(user)
+          params = attributes_for(:category, title: nil)
+
+          post api_v1_categories_path, headers: token, params: { category: params }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.create.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end

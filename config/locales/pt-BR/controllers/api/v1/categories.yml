@@ -1,0 +1,7 @@
+pt-BR:
+  api:
+    v1:
+      categories:
+        create:
+          success: Conta criada com sucesso.
+          failure: Falha ao criar conta.

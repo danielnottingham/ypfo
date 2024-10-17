@@ -15,6 +15,32 @@ module Api
           pagination: pagy_metadata(pagy)
         )
       end
+
+      def create
+        authorize(Category)
+        result = Categories::Create.result(params: category_params)
+
+        if result.success?
+          success_response(
+            data: result.category,
+            serializer: Api::V1::CategorySerializer,
+            status: :created,
+            message_key: "api.v1.categories.create.success"
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message_key: "api.v1.categories.create.failure"
+          )
+        end
+      end
+
+      private
+
+      def category_params
+        params.require(:category).permit(:title, :color).to_h.merge(user: current_user)
+      end
     end
   end
 end
