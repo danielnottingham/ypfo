@@ -55,6 +55,11 @@ paths:
       tags:
         - Categories
       $ref: "./paths/categories/index.yaml"
+    post:
+      summary: Criar uma categoria
+      tags:
+        - Categories
+      $ref: "./paths/categories/create.yaml"
   /api/v1/records:
     get:
       summary: Lista de transações

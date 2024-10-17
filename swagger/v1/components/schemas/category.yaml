@@ -45,3 +45,31 @@ CategoryUnauthorizedResponse:
       items:
         type: string
         example: Token inválido
+
+CategoryRequestBody:
+  type: object
+  properties:
+    title:
+      type: string
+      example: "Categoria Teste"
+    color:
+      type: string
+      example: "#ffffff"
+
+CategoryObjectResponse:
+  type: object
+  properties:
+    category:
+      $ref: "./category.yaml#/Category"
+
+CategoryCreateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Categoria criada com sucesso."
+    data:
+      $ref: "./category.yaml#/CategoryObjectResponse"
