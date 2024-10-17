@@ -15,19 +15,12 @@ cp .env.example .env
 # ambiente de testes
 cp .env.test.example .env.test
 ```
-5. Execute o comando `bundle install`
-6. Execute o comando para subir os serviços:
+4. Execute o comando para subir os serviços:
 ```
 docker compose up --build -d
 
-# executar os serviços com o ambiente de desenvolvimento
+# executar de forma explícita os serviços com o ambiente de desenvolvimento
 docker compose --env-file .env up -d
-
-# executar os serviços com o ambiente de testes
-docker compose --env-file .env.test up -d
-
-# executar os testes após após subir os serviços no ambiente de testes.
-docker compose exec app bundle exec rspec
 ```
 
 ## Acessando a Documentação da API
@@ -37,7 +30,11 @@ http://localhost:3000/api-docs/index.html
 ## Rodando os Testes
 Para garantir que tudo está funcionando corretamente e o código não quebre com novas implementações, você pode rodar os testes com o seguinte comando:
 ```
-bundle exec rspec
+# executar os serviços com o ambiente de testes
+docker compose --env-file .env.test up -d
+
+# executar os testes após após subir os serviços no ambiente de testes.
+docker compose exec app bundle exec rspec
 ```
 Certifique-se de que todos os testes estão passando antes de submeter alterações.
 
