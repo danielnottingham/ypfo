@@ -36,7 +36,31 @@ module Api
         end
       end
 
+      def update
+        authorize(category)
+        result = Categories::Update.result(id: category.id, params: category_params)
+
+        if result.success?
+          success_response(
+            data: result.category,
+            serializer: Api::V1::CategorySerializer,
+            status: :ok,
+            message_key: "api.v1.categories.update.success"
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message_key: "api.v1.categories.update.failure"
+          )
+        end
+      end
+
       private
+
+      def category
+        @category ||= Categories::Find.result(id: params[:id]).category
+      end
 
       def category_params
         params.require(:category).permit(:title, :color).to_h.merge(user: current_user)

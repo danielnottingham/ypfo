@@ -73,3 +73,22 @@ CategoryCreateResponse:
       example: "Categoria criada com sucesso."
     data:
       $ref: "./category.yaml#/CategoryObjectResponse"
+
+CategoryUpdateResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Categoria atualizada com sucesso."
+    data:
+      $ref: "./category.yaml#/CategoryObjectResponse"
+
+CategoryNotFoundResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: Not Found

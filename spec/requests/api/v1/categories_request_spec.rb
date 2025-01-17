@@ -119,4 +119,69 @@ RSpec.describe "Categories" do
       end
     end
   end
+
+  describe "PATCH PUT /api/v1/categories/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        category = create(:category)
+
+        patch api_v1_category_path(category)
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      context "when params are valid" do
+        it "returns status :ok with parsed_body message and status" do
+          user = create(:user)
+          token = access_token_for(user)
+          category = create(:category, user: user)
+          attributes = attributes_for(:category, title: "Category 1", color: "#ffffff")
+          params = attributes.merge(user: user)
+
+          patch api_v1_category_path(category), headers: token, params: { category: params }
+
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.update.success"))
+          expect(response.parsed_body["status"]).to eq("success")
+        end
+
+        it "returns parsed_body data" do
+          user = create(:user)
+          token = access_token_for(user)
+          category = create(:category, user: user)
+          attributes = attributes_for(:category, title: "Category 1", color: "#ffffff")
+          params = attributes.merge(user: user)
+
+          patch api_v1_category_path(category), headers: token, params: { category: params }
+
+          expect(response.parsed_body["data"]).to include(
+            "category" => {
+              "id" => category.id,
+              "title" => "Category 1",
+              "color" => "#ffffff",
+              "user_id" => user.id
+            }
+          )
+        end
+      end
+
+      context "when params are invalid" do
+        it "returns status :unprocessable_entity with parsed_body message and status" do
+          user = create(:user)
+          token = access_token_for(user)
+          category = create(:category, user: user)
+          params = attributes_for(:category, title: nil)
+
+          patch api_v1_category_path(category), headers: token, params: { category: params }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.update.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end

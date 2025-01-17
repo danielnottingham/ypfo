@@ -1,0 +1,49 @@
+summary: Atualizar uma categoria
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+tags:
+  - Categories
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../../components/schemas/category.yaml#/CategoryRequestBody"
+responses:
+  200:
+    description: Sucesso ao atualizar
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/category.yaml#/CategoryUpdateResponse"
+  401:
+    description: Não autorizado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/category.yaml#/CategoryUnauthorizedResponse"
+  404:
+    description: Não encontrado
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/category.yaml#/CategoryNotFoundResponse"
+  422:
+    description: Dados inválidos
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              example: error
+            message:
+              type: string
+              example: Falha ao atualizar categoria.
+            errors:
+              type: string
+              example: "A validação falhou: Título não pode ficar em branco"
