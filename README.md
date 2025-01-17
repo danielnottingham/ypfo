@@ -1,7 +1,7 @@
 ![example workflow](https://github.com/danielnottingham/ypfo/actions/workflows/ci.yml/badge.svg)
 
 ## Requerimentos:
-- Ruby 3.3.5 (apenas para desenvolvimento local, o Docker cuida das versões)
+- Ruby 3.3.6 (apenas para desenvolvimento local, o Docker cuida das versões)
 - Docker
 - Docker-Compose
 
