@@ -84,7 +84,7 @@ GEM
     bigdecimal (3.1.8)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (6.2.1)
+    brakeman (7.0.0)
       racc
     builder (3.3.0)
     bullet (7.2.0)
@@ -278,8 +278,9 @@ GEM
       redis-client (>= 0.22.0)
     redis-client (0.22.2)
       connection_pool
-    reek (6.3.0)
+    reek (6.4.0)
       dry-schema (~> 1.13.0)
+      logger (~> 1.6)
       parser (~> 3.3.0)
       rainbow (>= 2.0, < 4.0)
       rexml (~> 3.1)
@@ -289,7 +290,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.8)
+    rexml (3.4.0)
     rspec-core (3.13.1)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -381,7 +382,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (= 0.10.14)
   bootsnap (= 1.18.4)
-  brakeman (= 6.2.1)
+  brakeman (= 7.0.0)
   bullet (= 7.2.0)
   debug
   devise (= 4.9.4)
@@ -400,7 +401,7 @@ DEPENDENCIES
   rack-cors (= 2.0.2)
   rails (= 7.2.1)
   redis (= 5.3.0)
-  reek (= 6.3.0)
+  reek (= 6.4.0)
   rspec-rails (= 7.0.1)
   rswag (= 2.14.0)
   rubocop-performance (= 1.22.1)

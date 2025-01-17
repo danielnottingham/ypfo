@@ -34,8 +34,8 @@ group :development, :test do
 end
 
 group :development do
-  gem "brakeman", "6.2.1"
-  gem "reek", "6.3.0"
+  gem "brakeman", "7.0.0"
+  gem "reek", "6.4.0"
 end
 
 group :test do

@@ -67,6 +67,10 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
+
+RUN mkdir -p /usr/local/bundle && \
+    chown -R rails:rails /usr/local/bundle
+
 USER 1000:1000
 
 # Usar script de inicialização para preparar o banco de dados e servidor
