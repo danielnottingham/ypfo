@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.3.5"
+ruby "3.3.6"
 
 gem "active_model_serializers", "0.10.14"
 gem "bootsnap", "1.18.4", require: false

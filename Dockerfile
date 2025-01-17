@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Definir a versão do Ruby como um argumento
-ARG RUBY_VERSION=3.3.5
+ARG RUBY_VERSION=3.3.6
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Definir diretório de trabalho
@@ -9,7 +9,16 @@ WORKDIR /rails
 
 # Instalar pacotes base
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
+    apt-get install --no-install-recommends -y \
+    curl \
+    libjemalloc2 \
+    libvips \
+    postgresql-client \
+    build-essential \
+    git \
+    libpq-dev \
+    pkg-config \
+    rustc && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Definir ambiente padrão como development
@@ -17,7 +26,8 @@ ARG RAILS_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_JOBS=4 \
-    BUNDLE_RETRY=3
+    BUNDLE_RETRY=3 \
+    RUBY_YJIT_ENABLE=1
 
 # Etapa de build
 FROM base AS build
@@ -32,9 +42,9 @@ COPY Gemfile Gemfile.lock ./
 
 # Instalar gems, removendo aquelas desnecessárias para o ambiente
 RUN if [ "$RAILS_ENV" = "production" ]; then \
-        bundle config set without 'development test'; \
+    bundle config set without 'development test'; \
     else \
-        bundle config unset without; \
+    bundle config unset without; \
     fi && \
     bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
