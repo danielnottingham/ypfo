@@ -5,3 +5,6 @@ pt-BR:
         create:
           success: Conta criada com sucesso.
           failure: Falha ao criar conta.
+        update:
+          success: Conta atualizada com sucesso.
+          failure: Falha ao atualizar conta.

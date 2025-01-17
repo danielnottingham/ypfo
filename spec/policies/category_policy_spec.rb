@@ -45,4 +45,24 @@ RSpec.describe CategoryPolicy do
       expect(described_class.new(nil, Category).index?).to be false
     end
   end
+
+  describe "#update?" do
+    it "returns true for owner" do
+      user = create(:user)
+      category = create(:category, user: user)
+
+      expect(described_class.new(user, category).update?).to be true
+    end
+
+    it "returns false for non owner" do
+      user = create(:user)
+      category = create(:category)
+
+      expect(described_class.new(user, category).update?).to be false
+    end
+
+    it "returns false for unregistered user" do
+      expect(described_class.new(nil, Category).update?).to be false
+    end
+  end
 end
