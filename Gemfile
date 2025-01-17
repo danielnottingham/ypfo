@@ -19,18 +19,18 @@ gem "pundit", "2.4.0"
 gem "rack-cors", "2.0.2"
 gem "rails", "7.2.1"
 gem "redis", "5.3.0"
-gem "rswag", "2.14.0"
+gem "rswag", "2.16.0"
 gem "service_actor", "3.9.4"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
-  gem "bullet", "7.2.0"
-  gem "debug", platforms: %i[mri windows]
-  gem "factory_bot_rails", "6.4.3"
-  gem "pry", "0.14.2"
+  gem "bullet", "8.0.0"
+  gem "debug", "1.10.0", platforms: %i[mri windows]
+  gem "factory_bot_rails", "6.4.4"
+  gem "pry", "0.15.2"
   gem "pry-rails", "0.3.11"
-  gem "rubocop-performance", "1.22.1"
-  gem "rubocop-rails", "2.26.2", require: false
+  gem "rubocop-performance", "1.23.1"
+  gem "rubocop-rails", "2.28.0", require: false
 end
 
 group :development do
