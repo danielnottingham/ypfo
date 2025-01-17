@@ -4,11 +4,11 @@ source "https://rubygems.org"
 
 ruby "3.3.6"
 
-gem "active_model_serializers", "0.10.14"
+gem "active_model_serializers", "0.10.15"
 gem "bootsnap", "1.18.4", require: false
 gem "devise", "4.9.4"
 gem "devise-api", "0.2.0"
-gem "dotenv-rails", "3.1.4"
+gem "dotenv-rails", "3.1.7"
 gem "enumerate_it", "4.0.0"
 gem "money", "6.19.0"
 gem "ostruct", "0.6.1"
@@ -39,7 +39,7 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", "7.0.1"
+  gem "rspec-rails", "7.1.0"
   gem "shoulda-matchers", "6.4.0"
   gem "simplecov", "0.22.0", require: false
 end
