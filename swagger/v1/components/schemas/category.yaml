@@ -92,3 +92,13 @@ CategoryNotFoundResponse:
     error:
       type: string
       example: Not Found
+
+CategoryDestroyResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: success
+    message:
+      type: string
+      example: "Categoria excluída com sucesso."
