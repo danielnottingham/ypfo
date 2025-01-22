@@ -66,6 +66,11 @@ paths:
       tags:
         - Categories
       $ref: "./paths/categories/update.yaml"
+    delete:
+      summary: Excluir uma categoria
+      tags:
+        - Categories
+      $ref: "./paths/categories/destroy.yaml"
   /api/v1/records:
     get:
       summary: Lista de transações
