@@ -184,4 +184,47 @@ RSpec.describe "Categories" do
       end
     end
   end
+
+  describe "DELETE /api/v1/categories/:id" do
+    context "when not authenticated" do
+      it "returns unauthorized and error message" do
+        category = create(:category)
+
+        delete api_v1_category_path(category)
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.parsed_body["error_description"]).to eq([I18n.t("devise.api.error_response.invalid_token")])
+      end
+    end
+
+    context "when authenticated" do
+      it "returns status :ok with parsed_body message and status" do
+        user = create(:user)
+        token = access_token_for(user)
+        category = create(:category, user: user)
+
+        delete api_v1_category_path(category), headers: token
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.destroy.success"))
+        expect(response.parsed_body["status"]).to eq("success")
+      end
+
+      context "when category cannot be destroyed" do
+        it "returns status :unprocessable_entity with parsed_body message and status" do
+          user = create(:user)
+          category = create(:category, user: user)
+          token = access_token_for(user)
+          allow(Category).to receive(:find).with(category.id.to_s).and_return(category)
+          allow(category).to receive(:destroy).and_return(false)
+
+          delete api_v1_category_path(category.id), headers: token
+
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.parsed_body["message"]).to eq(I18n.t("api.v1.categories.destroy.failure"))
+          expect(response.parsed_body["status"]).to eq("error")
+        end
+      end
+    end
+  end
 end

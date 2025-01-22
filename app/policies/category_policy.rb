@@ -27,4 +27,8 @@ class CategoryPolicy < ApplicationPolicy
   def update?
     user.present? && owner?
   end
+
+  def destroy?
+    user.present? && owner?
+  end
 end

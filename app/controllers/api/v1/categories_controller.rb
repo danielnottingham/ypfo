@@ -56,6 +56,24 @@ module Api
         end
       end
 
+      def destroy
+        authorize(category)
+        result = Categories::Destroy.result(id: category.id)
+
+        if result.success?
+          success_response(
+            status: :ok,
+            message_key: "api.v1.categories.destroy.success"
+          )
+        else
+          error_response(
+            errors: result.error,
+            status: :unprocessable_content,
+            message_key: "api.v1.categories.destroy.failure"
+          )
+        end
+      end
+
       private
 
       def category

@@ -8,3 +8,6 @@ pt-BR:
         update:
           success: Conta atualizada com sucesso.
           failure: Falha ao atualizar conta.
+        destroy:
+          success: Conta excluída com sucesso.
+          failure: Falha ao excluir conta.
